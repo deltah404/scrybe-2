@@ -1,6 +1,5 @@
 import discord
-from discord.app import slash_command, option, ApplicationContext
-from discord.ext import commands
+from discord.ext import commands, slash_command, option, ApplicationContext
 from bot import guilds
 
 class Test(commands.Cog):
