@@ -1,12 +1,12 @@
 import discord
-from discord.ext import commands, slash_command, option, ApplicationContext
-from bot import guilds
+from discord.ext import commands
+import bot
 
 class Test(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @slash_command(guild_ids = guilds)
+    @commands.slash_command(guild_ids = bot.guilds)
     async def ping(self, ctx: commands.Context):
         await ctx.respond("pong")
 
