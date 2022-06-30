@@ -4,4 +4,4 @@ from dotenv import load_dotenv
 
 load_dotenv()
 bot = discord.Bot()
-bot.run(os.environ["TOKEN"])
+bot.run(os.environ["bot_token"])
