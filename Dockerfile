@@ -8,6 +8,8 @@ RUN pip install -r requirements.txt
 
 RUN pip install git+https://github.com/pycord/pycord
 
+RUN pip install python-dotenv
+
 COPY . .
 
 EXPOSE 1337
