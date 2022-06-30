@@ -10,8 +10,6 @@ class Test(commands.Cog):
     @commands.slash_command(guild_ids=bot.guilds)
     async def ping(self, ctx: discord.ApplicationContext):
         await ctx.respond("pong")
-        await ctx.send("pong")
-
 
 def setup(bot: commands.Bot):
     bot.add_cog(Test(bot))
