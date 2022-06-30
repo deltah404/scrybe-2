@@ -6,7 +6,7 @@ RUN pip freeze > requirements.txt
 
 RUN pip install -r requirements.txt
 
-RUN pip install git+https://github.com/pycord/pycord
+RUN pip install git+https://github.com/Pycord-Development/pycord
 
 RUN pip install python-dotenv
 
