@@ -10,7 +10,7 @@ RUN pip install git+https://github.com/Pycord-Development/pycord
 
 RUN pip install python-dotenv
 
-RUN pip install PyDictionary
+RUN pip install PyDictionary --use-deprecated=backtrack-on-build-failures
 
 COPY . .
 
