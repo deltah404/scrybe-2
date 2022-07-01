@@ -10,6 +10,8 @@ RUN pip install git+https://github.com/Pycord-Development/pycord
 
 RUN pip install python-dotenv
 
+RUN pip install PyDictionary
+
 COPY . .
 
 EXPOSE 1337
