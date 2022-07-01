@@ -1,10 +1,7 @@
-from turtle import title
 import discord
 import bot
 from discord.ext import commands
 from PyDictionary import PyDictionary
-
-words = PyDictionary()
 
 
 class Language(commands.Cog):
@@ -13,7 +10,10 @@ class Language(commands.Cog):
 
     @commands.slash_command(guild_ids=bot.guilds)
     async def define(self, ctx, word: discord.Option(str)):
-        response = await ctx.respond("Hang on...")
+        words = PyDictionary()
+        word = word.lower()
+        response = await ctx.respond(f":mag_right: Searching for **` {word} `**")
+
         definition = words.meaning(word)
         e = discord.Embed(
             title=f':notebook_with_decorative_cover: Definitions for "{word}"')
