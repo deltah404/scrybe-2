@@ -12,7 +12,7 @@ class Language(commands.Cog):
     async def define(self, ctx, word: discord.Option(str)):
         words = PyDictionary()
         word = word.lower()
-        response = await ctx.respond(f":mag_right: Searching for **` {word} `**")
+        response = await ctx.send_response(f":mag_right: Searching for **` {word} `**")
 
         definition = words.meaning(word)
         e = discord.Embed(
@@ -28,11 +28,11 @@ class Language(commands.Cog):
                     e.add_field(
                         name=k, value=f"{tick}: {d.replace(' (', '; ').replace('(','')}", inline=False)
                     tick += 1
-        
-        e.set_author(name = f"Requested by {ctx.author}", icon_url = ctx.author.display_avatar)
 
-        await response.delete_original_message()
-        await ctx.send(embed=e)
+        e.set_author(
+            name=f"Requested by {ctx.author}", icon_url=ctx.author.display_avatar)
+
+        await response.edit_original_message(embed=e, content="")
 
 
 def setup(bot: commands.Bot):

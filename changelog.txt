@@ -1,2 +1,2 @@
-- Added /changelog
-- Added username and profile picture of the requester to embeds
+- Small updates to how embeds in responses function
+- Added /ping
