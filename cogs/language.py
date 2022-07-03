@@ -16,7 +16,8 @@ class Language(commands.Cog):
 
         definition = words.meaning(word)
         e = discord.Embed(
-            title=f':notebook_with_decorative_cover: Definitions for "{word}"')
+            title=f':notebook_with_decorative_cover: Definitions for "{word}"'
+        )
         if not definition:
             e.description = ":question: No definitions found."
         else:
@@ -27,6 +28,8 @@ class Language(commands.Cog):
                     e.add_field(
                         name=k, value=f"{tick}: {d.replace(' (', '; ').replace('(','')}", inline=False)
                     tick += 1
+        
+        e.set_author(name = f"Requested by {ctx.author}", icon_url = ctx.author.display_avatar)
 
         await response.delete_original_message()
         await ctx.send(embed=e)
