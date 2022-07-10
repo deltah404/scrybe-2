@@ -35,5 +35,5 @@ class Language(commands.Cog):
         await response.edit_original_message(embed=e, content="")
 
 
-def setup(bot: commands.Bot):
+def setup(bot):
     bot.add_cog(Language(bot))
