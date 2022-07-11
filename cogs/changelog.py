@@ -11,9 +11,7 @@ class Changelog(commands.Cog):
     async def changelog(self, ctx):
         with open("./changelog.txt", "r") as fp:
             e = discord.Embed(title="Changelog", description=fp.read())
-            e.set_author(
-                name=f"Requested by {ctx.author}", icon_url=ctx.author.display_avatar)
-            await ctx.send_response(embed=e, ephemeral=True)
+        await ctx.send_response(embed=e)
 
 
 def setup(bot: commands.Bot):

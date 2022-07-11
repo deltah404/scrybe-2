@@ -24,13 +24,10 @@ class Language(commands.Cog):
             e.description = ""
             tick = 1
             for k in definition.keys():
-                for d in (definition[k])[0:7]:
+                for d in (definition[k])[:7]:
                     e.add_field(
                         name=k, value=f"{tick}: {d.replace(' (', '; ').replace('(','')}", inline=False)
                     tick += 1
-
-        e.set_author(
-            name=f"Requested by {ctx.author}", icon_url=ctx.author.display_avatar)
 
         await response.edit_original_message(embed=e, content="")
 
