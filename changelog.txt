@@ -1,2 +1,1 @@
-- Small updates to how embeds in responses function
-- Added /ping
+No notes

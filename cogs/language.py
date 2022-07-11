@@ -1,7 +1,7 @@
-import discord
-import bot
 from discord.ext import commands
 from PyDictionary import PyDictionary
+import discord
+import bot
 
 
 class Language(commands.Cog):
