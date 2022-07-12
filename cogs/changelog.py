@@ -14,5 +14,5 @@ class Changelog(commands.Cog):
         await ctx.send_response(embed=e)
 
 
-def setup(bot: commands.Bot):
+def setup(bot):
     bot.add_cog(Changelog(bot))

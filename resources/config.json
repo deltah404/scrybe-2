@@ -3,6 +3,6 @@
         "https://docs.google.com/document/",
         "https://pastebin.com/"
     ],
-    "unverified_link_message": ":warning: The link to this book is not managed or reviewed by Writer's Cave. Please proceed with caution.",
+    "unverified_link_message": ":warning: The link to this book is not managed or reviewed by Writer's Cave.\n**Please proceed with caution.**",
     "verified_link_message": "{} This link is recognised as safe by Writer's Cave."
 }

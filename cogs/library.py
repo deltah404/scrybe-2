@@ -9,6 +9,33 @@ half_star = "<:05star:996011722441773176>"
 full_star = "<:1star:996011724505362503>"
 verified = "<:verified:996028752070987796>"
 
+
+def human_rating(book) -> str:
+    if book["reviews"] == {}:
+        rating = 2.5
+    else:
+        for review in book["reviews"]:
+            rating += review["rating"]
+            rating /= len(book["reviews"])
+            rating = round(rating * 2) / 2
+
+    stars = ""
+    count = 0
+    while rating > 0:
+        if rating > 0.5:
+            stars += full_star
+            rating -= 1
+            count += 1
+        elif rating == 0.5:
+            stars += half_star
+            rating -= 0.5
+            count += 1
+
+    stars += empty_star*(5-count)
+
+    return stars
+
+
 with open("resources/config.json") as fp:
     config = json.load(fp)
 
@@ -50,30 +77,10 @@ class Library(commands.Cog):
 
         e = discord.Embed(
             title=book["title"], description=config["unverified_link_message"] if not verified_link else config["verified_link_message"].format(verified))
+
         e.add_field(name="Author", value=book["author"])
 
-        if book["reviews"] == {}:
-            rating = 2.5
-        else:
-            for review in book["reviews"]:
-                rating += review["rating"]
-            rating /= len(book["reviews"])
-            rating = round(rating * 2) / 2
-
-        stars = ""
-        count = 0
-        while rating > 0:
-            if rating > 0.5:
-                stars += full_star
-                rating -= 1
-                count += 1
-            elif rating == 0.5:
-                stars += half_star
-                rating -= 0.5
-                count += 1
-        stars += empty_star*(5-count)
-
-        e.add_field(name="Rating", value=stars)
+        e.add_field(name="Rating", value=human_rating(book))
         e.add_field(
             name="Link", value=f"[Click here]({book['link']})", inline=False)
 
