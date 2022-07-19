@@ -1,14 +1,14 @@
 from discord.ext import commands
 from PyDictionary import PyDictionary
 import discord
-import bot
+import extdata
 
 
 class Language(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command(guild_ids=bot.guilds)
+    @commands.slash_command(guild_ids=extdata.guilds)
     async def define(self, ctx, word: discord.Option(str)):
         words = PyDictionary()
         word = word.lower()

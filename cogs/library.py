@@ -1,23 +1,19 @@
-from random import choices
 from discord.ext import commands
-from resources.get_library import get_library, add_review
+from resources.get_library import get_library, add_review, add_book, remove_book
+from bot import verified, loading
+import extdata
 import discord
-import bot
 import json
 
-empty_star = "<:0star:996011723536465960>"
-half_star = "<:05star:996011722441773176>"
-full_star = "<:1star:996011724505362503>"
-verified = "<:verified:996028752070987796>"
-
-#  to-do
-#  O  add "add to library" command
-#  O  add "remove from library" command
-#  O  set user permissions for two above commands
-
+with open("resources/emoji.json", "r") as fp:
+    e = json.load(fp)
+    empty_star = e["empty_star"]
+    half_star = e["half_star"]
+    full_star = e["full_star"]
 
 def human_rating(book) -> str:
     """Convert numerical rating to a string of corresponding star emojis"""
+
     if isinstance(book, dict):
         if book["reviews"] == {}:
             rating = 2.5
@@ -54,12 +50,17 @@ library = get_library()["library"]
 class Library(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        print(bot.emojis)
 
     library_group = discord.SlashCommandGroup(
         "library", "Commands for the server library")
 
-    @library_group.command(guild_ids=bot.guilds)
+    edit_library = library_group.create_subgroup(
+        "edit", "Manage the library")
+
+    @library_group.command(guild_ids=extdata.guilds)
     async def list(self, ctx):
+        r = await ctx.send_response(f"{loading} Thinking...")
         library = get_library()["library"]
         e = discord.Embed(title="Writer's Cave Library")
         e.set_footer(
@@ -68,12 +69,13 @@ class Library(commands.Cog):
         for id in library:
             book = library[id]
             e.add_field(name=f"{book['title']}",
-                        value=f"by {book['author']}\n{human_rating(book)} *({len(book['reviews'])} reviews)*", inline=False)
+                        value=f"by {book['author']}\n{human_rating(book)} *({len(book['reviews'])} reviews)*")
 
-        await ctx.send_response(embed=e)
+        await r.edit_original_message(content=None, embed=e)
 
-    @library_group.command(guild_ids=bot.guilds)
+    @library_group.command(guild_ids=extdata.guilds)
     async def info(self, ctx, book: discord.Option(choices=[discord.OptionChoice(name=library[book]["title"], value=book) for book in library])):
+        r = await ctx.send_response(f"{loading} Thinking...")
         library = get_library()["library"]
         if str(book) not in library:
             return await ctx.send_response("There is no book with this ID. Try running `/library list` to see what books are available.", ephemeral=True)
@@ -90,7 +92,7 @@ class Library(commands.Cog):
             def __init__(self):
                 super().__init__(timeout=None)
                 urlbutton = discord.ui.Button(
-                    label=f"Read {book['title']}", style=discord.ButtonStyle.gray, url=book["link"])
+                    label=f"Read this book", style=discord.ButtonStyle.gray, url=book["link"], emoji="👀")
                 self.add_item(urlbutton)
 
         e = discord.Embed(
@@ -101,17 +103,47 @@ class Library(commands.Cog):
         e.add_field(
             name="Rating", value=f'{human_rating(book)} (*{len(book["reviews"])} reviews)*')
 
-        await ctx.send_response(embed=e, view=LinkView())
+        await r.edit_original_message(content=None, embed=e, view=LinkView())
 
-    @library_group.command(guild_ids=bot.guilds)
+    @library_group.command(guild_ids=extdata.guilds)
     async def review(self, ctx, book: discord.Option(choices=[discord.OptionChoice(name=library[book]["title"], value=book) for book in library]), rating: discord.Option(
             choices=[str(n) for n in [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5]]), content: discord.Option(default="")):
-        await ctx.send_response("~")
+        r = await ctx.send_response(f"{loading} Thinking...")
         add_review(book, {
             "rating": rating,
             "content": content,
             "author": ctx.author.id
         })
+        await r.edit_original_message(content="Review submitted!")
+
+    @edit_library.command(guild_ids=extdata.guilds)
+    @discord.default_permissions(
+        administrator=True
+    )
+    async def add(self, ctx, title: discord.Option(str), author: discord.Option(str), link: discord.Option(str)):
+        r = await ctx.send_response(f"{loading} Thinking...")
+
+        library = get_library()["library"]
+        for book in library:
+            if title.lower() == library[book]["title"].lower():
+                return await ctx.send_response(":x: A book with that title already exists; consider changing it slightly.")
+            elif link == library[book]["link"]:
+                return await ctx.send_response(":x: A book with that link already exists.")
+            else:
+                continue
+
+        add_book(title, author, link)
+        await r.edit_original_message(content=f"Added {title} by {author} to the library.")
+
+    @edit_library.command(guild_ids=extdata.guilds)
+    @discord.default_permissions(
+        administrator=True
+    )
+    async def remove(self, ctx, book: discord.Option(choices=[discord.OptionChoice(name=library[book]["title"], value=book) for book in library])):
+        r = await ctx.send_response(f"{loading} Thinking...")
+        book_details = get_library()["library"][str(book)]
+        remove_book(book)
+        await r.edit_original_message(content=f"Deleted {book_details['title']} by {book_details['author']} (ID {book})")
 
 
 def setup(bot):
