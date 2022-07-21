@@ -52,10 +52,10 @@ class Library(commands.Cog):
         self.bot = bot
 
     library_group = discord.commands.SlashCommandGroup(
-        "library", "Commands for the server library")
+        "library", "Commands for the server library", guild_ids=guilds)
 
     edit_library = library_group.create_subgroup(
-        "edit", "Manage the library")
+        "edit", "Manage the library", guild_ids=guilds)
 
     @library_group.command(guild_ids=guilds)
     async def list(self, ctx):
