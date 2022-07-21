@@ -4,7 +4,7 @@ import os
 import json
 
 guilds = [992020236222091355, 915996676144111706]
-with open("Scrybe-2/resources/emoji.json", "r") as fp:
+with open("resources/emoji.json", "r") as fp:
     e = json.load(fp)
     verified = e["verified"]
     loading = e["loading"]

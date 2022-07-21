@@ -4,7 +4,7 @@ from bot import bot, verified, loading, guilds
 import discord
 import json
 
-with open("Scrybe-2/resources/emoji.json", "r") as fp:
+with open("resources/emoji.json", "r") as fp:
     e = json.load(fp)
     empty_star = e["empty_star"]
     half_star = e["half_star"]
@@ -41,7 +41,7 @@ def human_rating(book) -> str:
         return stars
 
 
-with open("Scrybe-2/resources/config.json") as fp:
+with open("resources/config.json") as fp:
     config = json.load(fp)
 
 library = get_library()["library"]
