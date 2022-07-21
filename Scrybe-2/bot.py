@@ -6,6 +6,8 @@ import json
 intents = discord.Intents.default()
 intents.message_content = True
 
+guilds = [992020236222091355, 915996676144111706]
+
 load_dotenv()
 
 with open("Scrybe-2/resources/emoji.json", "r") as fp:
