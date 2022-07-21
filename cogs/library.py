@@ -51,7 +51,7 @@ class Library(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    library_group = commands.SlashCommandGroup(
+    library_group = discord.commands.SlashCommandGroup(
         "library", "Commands for the server library", guild_ids=guilds)
 
     edit_library = library_group.create_subgroup(
