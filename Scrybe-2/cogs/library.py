@@ -11,6 +11,7 @@ with open("Scrybe-2/resources/emoji.json", "r") as fp:
     half_star = e["half_star"]
     full_star = e["full_star"]
 
+
 def human_rating(book) -> str:
     """Convert numerical rating to a string of corresponding star emojis"""
 
