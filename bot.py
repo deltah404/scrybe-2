@@ -13,9 +13,6 @@ bot = discord.Bot()
 
 
 def main():
-    intents = discord.Intents.default()
-    intents.message_content = True
-
     load_dotenv()
 
     # import all bot cogs
