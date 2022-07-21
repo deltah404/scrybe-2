@@ -16,4 +16,4 @@ COPY . .
 
 USER 1000
 
-CMD [ "python3", "Scrybe-2/bot.py" ]
+CMD [ "python3", "-B", "Scrybe-2/bot.py" ]
