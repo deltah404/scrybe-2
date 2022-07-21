@@ -9,14 +9,14 @@ with open("Scrybe-2/resources/emoji.json", "r") as fp:
     verified = e["verified"]
     loading = e["loading"]
 
+bot = discord.Bot()
+
 
 def main():
     intents = discord.Intents.default()
     intents.message_content = True
 
     load_dotenv()
-
-    bot = discord.Bot()
 
     # import all bot cogs
     for fn in os.listdir("Scrybe-2/cogs"):

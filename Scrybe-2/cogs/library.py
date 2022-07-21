@@ -1,6 +1,6 @@
 from discord.ext import commands
 from resources.get_library import get_library, add_review, add_book, remove_book
-from bot import verified, loading, guilds
+from bot import bot, verified, loading, guilds
 import discord
 import json
 
@@ -51,7 +51,7 @@ class Library(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    library_group = discord.commands.SlashCommandGroup(
+    library_group = bot.create_group(
         "library", "Commands for the server library", guild_ids=guilds)
 
     edit_library = library_group.create_subgroup(
