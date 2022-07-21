@@ -12,7 +12,7 @@ class Language(commands.Cog):
     async def define(self, ctx, word: discord.Option(str)):
         words = PyDictionary()
         word = word.lower()
-        response = await ctx.send_response(f":mag_right: Searching for **` {word} `**")
+        response = await ctx.send_response(f":mag_right: Searching for ***` {word} `***")
 
         definition = words.meaning(word)
         e = discord.Embed(
