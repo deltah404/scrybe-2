@@ -19,7 +19,7 @@ def main():
     load_dotenv()
 
     # import all bot cogs
-    for fn in os.listdir("Scrybe-2/cogs"):
+    for fn in os.listdir("cogs"):
         if fn.endswith(".py"):
             bot.load_extension(f"cogs.{fn[:-3]}")
 
