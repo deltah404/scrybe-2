@@ -1,7 +1,7 @@
 from discord.ext import commands
 from discord.commands import SlashCommandGroup
 from resources.get_library import get_library, add_review, add_book, remove_book
-from bot import verified, loading, guilds
+from bot import guilds
 import discord
 import json
 
@@ -10,6 +10,8 @@ with open("resources/emoji.json", "r") as fp:
     empty_star = e["empty_star"]
     half_star = e["half_star"]
     full_star = e["full_star"]
+    verified = e["verified"]
+    loading = e["loading"]
 
 
 def human_rating(book) -> str:

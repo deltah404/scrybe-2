@@ -4,13 +4,8 @@ import os
 import json
 
 guilds = [992020236222091355, 915996676144111706]
-with open("resources/emoji.json", "r") as fp:
-    e = json.load(fp)
-    verified = e["verified"]
-    loading = e["loading"]
 
 bot = discord.Bot()
-
 
 def main():
     load_dotenv()
