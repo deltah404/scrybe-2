@@ -5,7 +5,7 @@ import extdata
 import discord
 import json
 
-with open("resources/emoji.json", "r") as fp:
+with open("Scrybe-2/resources/emoji.json", "r") as fp:
     e = json.load(fp)
     empty_star = e["empty_star"]
     half_star = e["half_star"]
@@ -41,7 +41,7 @@ def human_rating(book) -> str:
         return stars
 
 
-with open("resources/config.json") as fp:
+with open("Scrybe-2/resources/config.json") as fp:
     config = json.load(fp)
 
 library = get_library()["library"]
@@ -50,7 +50,6 @@ library = get_library()["library"]
 class Library(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        print(bot.emojis)
 
     library_group = discord.SlashCommandGroup(
         "library", "Commands for the server library")

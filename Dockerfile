@@ -20,4 +20,4 @@ EXPOSE 1337
 
 USER 1000
 
-CMD [ "python", "./bot.py" ]
+CMD [ "python", "./Scrybe-2/bot.py" ]

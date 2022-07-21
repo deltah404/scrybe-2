@@ -8,17 +8,17 @@ intents.message_content = True
 
 load_dotenv()
 
-with open("resources/emoji.json", "r") as fp:
+with open("Scrybe-2/resources/emoji.json", "r") as fp:
     e = json.load(fp)
     verified = e["verified"]
     loading = e["loading"]
 
-Bot = discord.Bot()
+bot = discord.Bot()
 
 # import all bot cogs
-for fn in os.listdir("./cogs"):
+for fn in os.listdir("Scrybe-2/cogs"):
     if fn.endswith(".py"):
-        Bot.load_extension(f"cogs.{fn[:-3]}")
+        bot.load_extension(f"cogs.{fn[:-3]}")
 
 # start up the bot
-Bot.run(os.environ["bot_token"])
+bot.run(os.environ["bot_token"])
