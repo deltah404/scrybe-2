@@ -12,11 +12,7 @@ RUN pip install python-dotenv
 
 RUN pip install PyDictionary --use-deprecated=backtrack-on-build-failures
 
-RUN pip install python-gist
-
 COPY . .
-
-EXPOSE 1337
 
 USER 1000
 
