@@ -7,4 +7,4 @@ RUN pip install python-dotenv
 RUN pip install PyDictionary --use-deprecated=backtrack-on-build-failures
 COPY . .
 USER 1000
-CMD [ "python3", "-B", "bot.py" ]
+CMD [ "python3", "bot.py" ]
