@@ -14,6 +14,11 @@ def load_cogs():
         if fn.endswith(".py"):
             bot.load_extension(f"cogs.{fn[:-3]}")
 
+    try:
+        bot.load_extension("cogs.library")
+    except discord.errors.ExtensionAlreadyLoaded:
+        pass
+
 # start up the bot
 load_cogs()
 bot.run(os.environ["bot_token"])
