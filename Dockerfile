@@ -6,7 +6,7 @@ RUN pip install python-dotenv
 RUN pip install PyDictionary --use-deprecated=backtrack-on-build-failures
 RUN git clone https://github.com/Pycord-Development/pycord
 RUN cd pycord
-RUN python3 -m pip install -U
+RUN pip install .
 RUN cd .
 COPY . .
 USER 1000
