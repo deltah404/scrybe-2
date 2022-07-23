@@ -10,7 +10,7 @@ load_dotenv()
 
 # import all bot cogs
 def load_cogs():
-    for fn in os.listdir("cogs"):
+    for fn in os.listdir("./cogs"):
         if fn.endswith(".py"):
             bot.load_extension(f"cogs.{fn[:-3]}")
 
