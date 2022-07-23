@@ -148,5 +148,9 @@ class Library(commands.Cog):
         await r.edit_original_message(content=f"Deleted {book_details['title']} by {book_details['author']} (ID {book})")
 
 
+    @commands.slash_command(guild_ids=guilds)
+    async def test(self, ctx):
+        await ctx.send_response("test")
+
 def setup(bot):
     bot.add_cog(Library(bot))
