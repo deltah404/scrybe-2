@@ -55,10 +55,10 @@ class Library(commands.Cog):
         self.bot = bot
 
     library_group = SlashCommandGroup(
-        "library", "Commands for the server library", guild_ids=guilds)
+        "library", "Commands for the server library")
 
     edit_library = library_group.create_subgroup(
-        "edit", "Manage the library", guild_ids=guilds)
+        "edit", "Manage the library")
 
     @library_group.command(guild_ids=guilds)
     async def list(self, ctx):
