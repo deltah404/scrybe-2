@@ -4,10 +4,6 @@ import os
 
 guilds = [992020236222091355, 915996676144111706]
 
-bot = discord.Bot()
-
-load_dotenv()
-
 # import all bot cogs
 def load_cogs():
     for fn in os.listdir("./cogs"):
@@ -20,5 +16,8 @@ def load_cogs():
         pass
 
 # start up the bot
-load_cogs()
-bot.run(os.environ["bot_token"])
+if __name__ == "__main__":
+    bot = discord.Bot()
+    load_dotenv()
+    load_cogs()
+    bot.run(os.environ["bot_token"])
