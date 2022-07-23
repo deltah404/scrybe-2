@@ -5,15 +5,13 @@ import os
 guilds = [992020236222091355, 915996676144111706]
 
 # import all bot cogs
+
+
 def load_cogs():
     for fn in os.listdir("./cogs"):
         if fn.endswith(".py"):
             bot.load_extension(f"cogs.{fn[:-3]}")
 
-    try:
-        bot.load_extension("cogs.library")
-    except discord.errors.ExtensionAlreadyLoaded:
-        pass
 
 # start up the bot
 if __name__ == "__main__":
