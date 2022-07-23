@@ -1,6 +1,6 @@
 from discord.ext import commands
 from discord.commands import SlashCommandGroup
-from resources.get_library import get_library, add_review, add_book, remove_book
+from resources.get_library import *
 from bot import guilds
 import discord
 import json
