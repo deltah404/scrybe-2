@@ -1,2 +1,3 @@
 + Added descriptions to slash commands
 + Fixed bugs related to the Library category
++ Added /embed

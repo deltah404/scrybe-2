@@ -1,4 +1,5 @@
 from discord.ext import commands
+from resources.colour import colours
 import resources.get_configs
 import discord
 
@@ -11,10 +12,24 @@ class Misc(commands.Cog):
 
     @commands.slash_command(
         guild_ids=guilds,
+        description="Creates an embed and sends it"
+    )
+    async def embed(self, ctx, title: discord.Option(str), description: discord.Option(str), colour: discord.Option(choices=[discord.OptionChoice(name=c, value=c) for c in colours])):
+        await ctx.respond("...", delete_after=0)
+        c = colours[colour]
+        await ctx.send(embed=discord.Embed(
+            title=title,
+            description=description,
+            colour=discord.Color.from_rgb(c[0], c[1], c[2])
+        ))
+
+    @commands.slash_command(
+        guild_ids=guilds,
         description="Sends the bot's latency in ms"
     )
     async def ping(self, ctx):
         await ctx.send_response(embed=discord.Embed(title="Pong!", description=f"Latency: `{round(self.bot.latency*1000, 2)}ms`"), ephemeral=True)
+
 
 
 def setup(bot):
