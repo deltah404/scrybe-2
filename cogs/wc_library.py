@@ -64,7 +64,8 @@ class Library(commands.Cog):
         "edit", "Manage the library")
 
     @library_group.command(
-        guild_ids=guilds
+        guild_ids=guilds,
+        description="Shows the books in the server library"
     )
     async def list(self, ctx):
         r = await ctx.send_response(f"{loading} Thinking...")
@@ -81,7 +82,8 @@ class Library(commands.Cog):
         await r.edit_original_message(content=None, embed=e)
 
     @library_group.command(
-        guild_ids=guilds
+        guild_ids=guilds,
+        description="Shows more information on a specified book"
     )
     async def info(self, ctx, book: discord.Option(choices=[discord.OptionChoice(name=library[book]["title"], value=book) for book in library])):
         r = await ctx.send_response(f"{loading} Thinking...")
@@ -115,7 +117,8 @@ class Library(commands.Cog):
         await r.edit_original_message(content=None, embed=e, view=LinkView())
 
     @library_group.command(
-        guild_ids=guilds
+        guild_ids=guilds,
+        description="Submit a review on a specified book"
     )
     async def review(self, ctx, book: discord.Option(choices=[discord.OptionChoice(name=library[book]["title"], value=book) for book in library]), rating: discord.Option(
             choices=[str(n) for n in [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5]]), content: discord.Option(default="")):
@@ -128,11 +131,10 @@ class Library(commands.Cog):
         await r.edit_original_message(content="Review submitted!")
 
     @edit_library.command(
-        guild_ids=guilds
+        guild_ids=guilds,
+        description="Add a book to the server library"
     )
-    @discord.default_permissions(
-        administrator=True
-    )
+    @discord.default_permissions(administrator=True)
     async def add(self, ctx, title: discord.Option(str), author: discord.Option(str), link: discord.Option(str)):
         r = await ctx.send_response(f"{loading} Thinking...")
 
@@ -149,23 +151,16 @@ class Library(commands.Cog):
         await r.edit_original_message(content=f"Added {title} by {author} to the library.")
 
     @edit_library.command(
-        guild_ids=guilds
+        guild_ids=guilds,
+        description="Removes a book from the server library"
     )
-    @discord.default_permissions(
-        administrator=True
-    )
+    @discord.default_permissions(administrator=True)
     async def remove(self, ctx, book: discord.Option(choices=[discord.OptionChoice(name=library[book]["title"], value=book) for book in library])):
         r = await ctx.send_response(f"{loading} Thinking...")
         book_details = get_library()["library"][str(book)]
         remove_book(book)
         await r.edit_original_message(content=f"Deleted {book_details['title']} by {book_details['author']} (ID {book})")
 
-
-    @commands.slash_command(
-        guild_ids=guilds
-    )
-    async def test(self, ctx):
-        await ctx.send_response("test")
 
 def setup(bot):
     bot.add_cog(Library(bot))

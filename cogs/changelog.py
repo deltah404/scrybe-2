@@ -8,7 +8,10 @@ class Changelog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command(guild_ids=guilds)
+    @commands.slash_command(
+        guild_ids=guilds,
+        description="Sends the changelog of the newest features added to the bot"
+    )
     async def changelog(self, ctx):
         with open("./changelog.txt", "r") as fp:
             e = discord.Embed(title="Changelog", description=fp.read())

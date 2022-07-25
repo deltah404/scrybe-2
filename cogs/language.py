@@ -11,12 +11,13 @@ class Language(commands.Cog):
         self.bot = bot
 
     @commands.slash_command(
-        guild_ids=guilds
+        guild_ids=guilds,
+        descriptions="Shows definitions for a specified English word"
     )
     async def define(self, ctx, word: discord.Option(str)):
         words = PyDictionary()
         word = word.lower()
-        response = await ctx.send_response(f":mag_right: Searching for ***` {word} `***")
+        response = await ctx.send_response(f":mag_right: Searching for *\"{word}\"*...")
 
         definition = words.meaning(word)
         e = discord.Embed(
