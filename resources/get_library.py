@@ -1,5 +1,4 @@
 from dotenv import load_dotenv
-from matplotlib.pyplot import get
 import requests
 import json
 import os

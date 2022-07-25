@@ -5,7 +5,7 @@ import resources.get_configs
 import discord
 import json
 
-guilds = get_configs.get_attr("guilds")
+guilds = resources.get_configs.get_attr("guilds")
 
 
 with open("resources/emoji.json", "r") as fp:
@@ -63,7 +63,9 @@ class Library(commands.Cog):
     edit_library = library_group.create_subgroup(
         "edit", "Manage the library")
 
-    @library_group.command(guild_ids=guilds)
+    @library_group.command(
+        guild_ids=guilds
+    )
     async def list(self, ctx):
         r = await ctx.send_response(f"{loading} Thinking...")
         library = get_library()["library"]
@@ -78,7 +80,9 @@ class Library(commands.Cog):
 
         await r.edit_original_message(content=None, embed=e)
 
-    @library_group.command(guild_ids=guilds)
+    @library_group.command(
+        guild_ids=guilds
+    )
     async def info(self, ctx, book: discord.Option(choices=[discord.OptionChoice(name=library[book]["title"], value=book) for book in library])):
         r = await ctx.send_response(f"{loading} Thinking...")
         library = get_library()["library"]
@@ -110,7 +114,9 @@ class Library(commands.Cog):
 
         await r.edit_original_message(content=None, embed=e, view=LinkView())
 
-    @library_group.command(guild_ids=guilds)
+    @library_group.command(
+        guild_ids=guilds
+    )
     async def review(self, ctx, book: discord.Option(choices=[discord.OptionChoice(name=library[book]["title"], value=book) for book in library]), rating: discord.Option(
             choices=[str(n) for n in [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5]]), content: discord.Option(default="")):
         r = await ctx.send_response(f"{loading} Thinking...")
@@ -121,7 +127,9 @@ class Library(commands.Cog):
         })
         await r.edit_original_message(content="Review submitted!")
 
-    @edit_library.command(guild_ids=guilds)
+    @edit_library.command(
+        guild_ids=guilds
+    )
     @discord.default_permissions(
         administrator=True
     )
@@ -140,7 +148,9 @@ class Library(commands.Cog):
         add_book(title, author, link)
         await r.edit_original_message(content=f"Added {title} by {author} to the library.")
 
-    @edit_library.command(guild_ids=guilds)
+    @edit_library.command(
+        guild_ids=guilds
+    )
     @discord.default_permissions(
         administrator=True
     )
@@ -151,7 +161,9 @@ class Library(commands.Cog):
         await r.edit_original_message(content=f"Deleted {book_details['title']} by {book_details['author']} (ID {book})")
 
 
-    @commands.slash_command(guild_ids=guilds)
+    @commands.slash_command(
+        guild_ids=guilds
+    )
     async def test(self, ctx):
         await ctx.send_response("test")
 

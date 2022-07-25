@@ -3,14 +3,16 @@ from PyDictionary import PyDictionary
 import resources.get_configs
 import discord
 
-guilds = get_configs.get_attr("guilds")
+guilds = resources.get_configs.get_attr("guilds")
 
 
 class Language(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command(guild_ids=guilds)
+    @commands.slash_command(
+        guild_ids=guilds
+    )
     async def define(self, ctx, word: discord.Option(str)):
         words = PyDictionary()
         word = word.lower()

@@ -2,7 +2,7 @@ from discord.ext import commands
 import resources.get_configs
 import discord
 
-guilds = get_configs.get_attr("guilds")
+guilds = resources.get_configs.get_attr("guilds")
 
 class Changelog(commands.Cog):
     def __init__(self, bot):
