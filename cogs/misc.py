@@ -29,6 +29,17 @@ class Misc(commands.Cog):
     )
     async def ping(self, ctx):
         await ctx.send_response(embed=discord.Embed(title="Pong!", description=f"Latency: `{round(self.bot.latency*1000, 2)}ms`"), ephemeral=True)
+    
+    @commands.slash_command(
+        guild_ids=guilds,
+        description="Submit an issue report or a suggestion"
+    )
+    async def report(self, ctx):
+        await ctx.send_response(embed=discord.Embed(
+            title="Found a problem or have a suggestion?",
+            description="Submit it [here](https://github.com/deltah404/scrybe-2/issues)",
+            colour=discord.Colour.blurple()
+        ), ephemeral=True)
 
 
 
