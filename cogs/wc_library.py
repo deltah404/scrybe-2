@@ -1,9 +1,12 @@
 from discord.ext import commands
 from discord.commands import SlashCommandGroup
 from resources.get_library import *
-from bot import guilds
+import resources.get_configs
 import discord
 import json
+
+guilds = get_configs.get_attr("guilds")
+
 
 with open("resources/emoji.json", "r") as fp:
     e = json.load(fp)

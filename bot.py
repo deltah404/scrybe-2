@@ -2,8 +2,6 @@ from dotenv import load_dotenv
 import discord
 import os
 
-guilds = [992020236222091355, 915996676144111706]
-
 
 def load_cogs():
     for fn in os.listdir("./cogs"):

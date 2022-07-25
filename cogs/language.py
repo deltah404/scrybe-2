@@ -1,7 +1,9 @@
 from discord.ext import commands
 from PyDictionary import PyDictionary
-from bot import guilds
+import resources.get_configs
 import discord
+
+guilds = get_configs.get_attr("guilds")
 
 
 class Language(commands.Cog):
