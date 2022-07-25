@@ -4,8 +4,6 @@ import os
 
 guilds = [992020236222091355, 915996676144111706]
 
-# import all bot cogs
-
 
 def load_cogs():
     for fn in os.listdir("./cogs"):
@@ -13,7 +11,6 @@ def load_cogs():
             bot.load_extension(f"cogs.{fn[:-3]}")
 
 
-# start up the bot
 if __name__ == "__main__":
     bot = discord.Bot()
     load_dotenv()
