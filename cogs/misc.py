@@ -14,7 +14,7 @@ class Misc(commands.Cog):
         guild_ids=guilds,
         description="Creates an embed and sends it"
     )
-    async def embed(self, ctx, title: discord.Option(str), description: discord.Option(str), colour: discord.Option(choices=[discord.OptionChoice(name=c, value=c) for c in colours])):
+    async def embed(self, ctx, title: discord.Option(str), description: discord.Option(str), colour: discord.Option(default="default", choices=[discord.OptionChoice(name=c, value=c) for c in colours])):
         await ctx.respond("...", delete_after=0)
         c = colours[colour]
         await ctx.send(embed=discord.Embed(
