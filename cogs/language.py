@@ -12,7 +12,7 @@ class Language(commands.Cog):
 
     @commands.slash_command(
         guild_ids=guilds,
-        descriptions="Shows definitions for a specified English word"
+        description="Shows definitions for a specified English word"
     )
     async def define(self, ctx, word: discord.Option(str)):
         words = PyDictionary()
